@@ -11,7 +11,7 @@ app.secret_key = 'fdsgkljfjklfljdsljövfdökljfljöbkfljökfgljbfdkljbiojfioufdn
 lock_db = False
 
 def lock():
-    while not lock_db:
+    while lock_db:
         i = 10
     return True
 
@@ -20,7 +20,7 @@ def connect_db():
     return connection
 
 def check_if_free(termin_id, conn):
-#    lock_db = lock()
+    lock_db = lock()
     cursor = conn.cursor()
     print(termin_id)
     cursor.execute('SELECT max_participants FROM termine WHERE id='+str(termin_id))
@@ -34,7 +34,7 @@ def check_if_free(termin_id, conn):
     return False
 
 def book(termin_id, conn):
-#    lock_db = lock()
+    lock_db = lock()
     cursor = conn.cursor()
     key = random.randint(0, 999999)
     cursor.execute('INSERT INTO t'+str(termin_id)+'(id, key) VALUES ((select max(id) from t'+str(termin_id)+')+1, '+str(key)+')')
