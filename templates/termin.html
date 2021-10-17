@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Terminauswahl</h2>
+{% for termin in termine %}
+<p>{{termin}}</p>
+{% endfor %}
+<form action="/book" method="post">
+	<label for="id">ID des Termins</label>
+	<input type="text" id="id" name="termin_id"><br>
+	<label for="anzahl">Anzahl an Personen</label>
+	<input type="text" id="anzahl" name="anzahl"><br>
+	<input type="submit">
+</form>
+
+{% endblock %}
+
